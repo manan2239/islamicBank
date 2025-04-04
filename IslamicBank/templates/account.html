@@ -1,13 +1,71 @@
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account</title>
-    <link rel="stylesheet" href="static/style.css">
+    <title>Account Details</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h2>My Account</h2>
-    <p>Welcome, user! Here you can view your transactions and account details.</p>
+    <h1>Account Details</h1>
+    <!-- Existing account details section -->
+    <!-- ...existing code... -->
+
+    <h2>Transaction Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody id="transaction-details">
+            <!-- Transaction details will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Generate random transaction details
+        const transactions = Array.from({ length: 5 }, (_, i) => ({
+            id: `TXN${Math.floor(Math.random() * 100000)}`,
+            date: new Date().toISOString().split('T')[0],
+            amount: (Math.random() * 1000).toFixed(2),
+            type: Math.random() > 0.5 ? 'Credit' : 'Debit',
+            description: 'Sample transaction'
+        }));
+
+        // Populate the transaction details table
+        const transactionDetails = document.getElementById('transaction-details');
+        transactions.forEach(transaction => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${transaction.id}</td>
+                <td>${transaction.date}</td>
+                <td>${transaction.amount}</td>
+                <td>${transaction.type}</td>
+                <td>${transaction.description}</td>
+            `;
+            transactionDetails.appendChild(row);
+        });
+    </script>
 </body>
 </html>
